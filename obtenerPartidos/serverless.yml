@@ -11,7 +11,7 @@
 #
 # Happy Coding!
 
-service: promesometro-api # NOTE: update this with your service name
+service: promesometro-api-partidos # NOTE: update this with your service name
 
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
@@ -21,11 +21,11 @@ provider:
   name: aws
   runtime: nodejs8.10
   iamRoleStatements:
-      - Effect: "Allow"
-        Action:
-          - "dynamodb:*"
-        Resource:
-          - "*"
+        - Effect: "Allow"
+          Action:
+            - "dynamodb:*"
+          Resource:
+            - "*"
 
 # you can overwrite defaults here
 #  stage: dev
@@ -61,21 +61,11 @@ region: us-east-1
 #    - exclude-me-dir/**
 
 functions:
-  agregarCandidatoPromesa:
-    handler: candidatopromesa.agregarCandidatoPromesa
-    events:
-      - http: POST agregarcandidatopromesa
-        cors: true
-  editarCandidatoPromesa:
-    handler: candidatopromesa.editarCandidatoPromesa
-    events:
-      - http: PUT editarcandidatopromesa
-        cors: true
-  listarPromesas:
-    handler: candidatopromesa.listarTodo
-    events:
-      - http: GET listarpromesas
-        cors: true
+  obtenerPartidos:
+    handler: obtenerPartidos.obtenerPartidos
+    events :
+      - http : GET obtener-partidos
+        cors : true
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events

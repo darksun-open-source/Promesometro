@@ -3,30 +3,20 @@
 const aws = require('aws-sdk');
 const uuid = require('uuid');
 const dynamodb = new aws.DynamoDB.DocumentClient();
-const table = 'candidatopromesa'
+const table = 'partidos'
 
-module.exports.agregarCandidatoPromesa = async (event) => {
-  console.log(event);
-  console.log(JSON.stringify(event));
-  console.log(event.hola)
-  /* var name = event.queryStringParameters.name;
-  var partido = event.queryStringParameters.partido;
-  var imagen = event.queryStringParameters.image;
-  var tituloP = event.queryStringParameters.titulop;
-  var descripcionP = event.queryStringParameters.descripcionp;
-  var avance = event.queryStringParameters.avance;
-  var categoria = event.queryStringParameters.categoria;
+module.exports.agregarPartido = async (event) => {
+  var body = JSON.parse(event.body);
+
+  var nombre = body.nombre;
+  var imagen = body.imagen;
 
   var params = {
     Item: {
       "id": uuid.v1(),
-      "nombre": name, 
-      "partido": partido,
+      "nombre": nombre,
       "imagen": imagen,
-      "tituloP": tituloP,
-      "descripcionP": descripcionP,
-      "avance": avance,
-      "categoria": categoria
+      "candidatos": []
     },
     TableName: table
   };
@@ -35,7 +25,7 @@ module.exports.agregarCandidatoPromesa = async (event) => {
 
   return r;
   // Use this code if you don't use the http event with the LAMBDA-PROXY integration
-  // return { message: 'Go Serverless v1.0! Your function executed successfully!', event }; */
+  // return { message: 'Go Serverless v1.0! Your function executed successfully!', event }; 
 };
 
 module.exports.listarTodo = async (event) => {
